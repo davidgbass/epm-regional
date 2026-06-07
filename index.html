@@ -18,7 +18,9 @@
   --creme:   #f5f0e8;
   --creme2:  #ede6d6;
   --creme3:  #e4dbc8;
-  --orange:  #e8762a;
+  --orange:  #e8762a;   /* clair — décoratif uniquement (barres, bordures) */
+  --orange-fonce:   #b35310;  /* texte/fond porteur de texte — WCAG AA */
+  --orange-fonce-h: #9e4a10;  /* survol */
   --orange2: #f5a05a;
   --noir:    #1a1a14;
   --gris:    #5a5548;
@@ -38,6 +40,13 @@
 }
 
 html { scroll-behavior: smooth; }
+
+/* Visibilité du focus clavier (WCAG 2.4.7) */
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--orange-fonce);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
 
 body {
   background: var(--creme);
@@ -89,11 +98,11 @@ nav {
   text-decoration: none;
   letter-spacing: -0.01em;
 }
-.nav-brand em { font-style: italic; font-weight: 400; color: var(--orange); }
+.nav-brand em { font-style: italic; font-weight: 400; color: var(--orange-fonce); }
 
 .nav-logo {
   width: 34px; height: 34px; border-radius: 50%;
-  background: var(--orange);
+  background: var(--orange-fonce);
   display: flex; align-items: center; justify-content: center;
   font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: #fff;
   flex-shrink: 0;
@@ -111,10 +120,10 @@ nav {
   letter-spacing: 0.01em;
   transition: color var(--transition);
 }
-.nav-links a:hover { color: var(--orange); }
+.nav-links a:hover { color: var(--orange-fonce); }
 
 .nav-cta {
-  background: var(--orange); color: #fff;
+  background: var(--orange-fonce); color: #fff;
   font-family: var(--font-body);
   font-size: 0.8rem; font-weight: 600;
   padding: 0.5rem 1.2rem;
@@ -124,7 +133,7 @@ nav {
   transition: background var(--transition), transform 0.15s;
   white-space: nowrap;
 }
-.nav-cta:hover { background: #c96018; transform: translateY(-1px); }
+.nav-cta:hover { background: var(--orange-fonce-h); transform: translateY(-1px); }
 
 /* Hamburger */
 .nav-hamburger {
@@ -165,11 +174,11 @@ nav {
   letter-spacing: -0.01em;
   transition: color var(--transition);
 }
-.nav-drawer a:hover { color: var(--orange); }
+.nav-drawer a:hover { color: var(--orange-fonce); }
 .nav-drawer .drawer-cta {
   margin-top: 1.5rem;
   display: inline-block;
-  background: var(--orange); color: #fff;
+  background: var(--orange-fonce); color: #fff;
   font-family: var(--font-body);
   font-size: 1rem; font-weight: 600;
   padding: 0.85rem 2rem;
@@ -179,7 +188,7 @@ nav {
   width: fit-content;
   transition: background var(--transition);
 }
-.nav-drawer .drawer-cta:hover { background: #c96018; }
+.nav-drawer .drawer-cta:hover { background: var(--orange-fonce-h); }
 
 /* ─────────────────────────────────────────
    HERO — PLEIN ÉCRAN PHOTO
@@ -238,7 +247,7 @@ nav {
 }
 .hero-tag-dot {
   width: 20px; height: 20px; border-radius: 50%;
-  background: var(--orange);
+  background: var(--orange-fonce);
   display: flex; align-items: center; justify-content: center;
   font-size: 0.58rem; font-weight: 700; color: #fff;
 }
@@ -326,7 +335,7 @@ nav {
    BUTTONS
 ───────────────────────────────────────── */
 .btn-primary {
-  background: var(--orange); color: #fff;
+  background: var(--orange-fonce); color: #fff;
   font-family: var(--font-body);
   font-size: 0.9rem; font-weight: 600;
   padding: 0.78rem 1.8rem; border-radius: 40px;
@@ -335,7 +344,7 @@ nav {
   display: inline-block;
   min-height: 44px; /* accessibility touch target */
 }
-.btn-primary:hover { background: #c96018; transform: translateY(-1px); }
+.btn-primary:hover { background: var(--orange-fonce-h); transform: translateY(-1px); }
 
 .btn-ghost {
   font-family: var(--font-body);
@@ -372,7 +381,7 @@ nav {
 }
 .sec-num {
   width: 24px; height: 24px; border-radius: 50%;
-  background: var(--orange);
+  background: var(--orange-fonce);
   display: flex; align-items: center; justify-content: center;
   font-size: 0.62rem; font-weight: 700; color: #fff; flex-shrink: 0;
 }
@@ -380,7 +389,7 @@ nav {
   font-family: var(--font-body);
   font-size: 0.68rem; font-weight: 600;
   letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--gris2);
+  color: var(--gris);
 }
 
 /* Section headline */
@@ -395,7 +404,7 @@ nav {
 }
 .sec-headline em {
   font-style: italic; font-weight: 400;
-  color: var(--orange);
+  color: var(--orange-fonce);
 }
 
 /* ─────────────────────────────────────────
@@ -485,7 +494,7 @@ nav {
   max-width: var(--max-w); margin: 0 auto;
   padding: 0 var(--pad-x);
 }
-.modele-inner .sec-txt { color: rgba(255,255,255,0.35); }
+.modele-inner .sec-txt { color: rgba(255,255,255,0.55); }
 .modele-inner .sec-headline { color: #fff; }
 .modele-inner .sec-headline em { color: var(--orange2); }
 
@@ -498,7 +507,7 @@ nav {
 
 /* Coord bloc */
 .coord-bloc {
-  background: var(--orange);
+  background: var(--orange-fonce);
   border-radius: var(--radius);
   padding: 2.5rem;
   margin-top: 2rem;
@@ -514,7 +523,7 @@ nav {
 }
 .coord-text {
   font-family: var(--font-body);
-  font-size: 0.95rem; color: rgba(255,255,255,0.9);
+  font-size: 0.95rem; color: #fff;
   font-weight: 400; line-height: 1.75;
 }
 .coord-aside {
@@ -526,7 +535,7 @@ nav {
   font-family: var(--font-body);
   font-size: 0.65rem; font-weight: 600;
   letter-spacing: 0.18em; text-transform: uppercase;
-  color: rgba(255,255,255,0.65); margin-bottom: 5px;
+  color: rgba(255,255,255,0.95); margin-bottom: 5px;
 }
 .coord-val {
   font-family: var(--font-body);
@@ -599,7 +608,7 @@ nav {
 }
 .tv { color: var(--bleu); }
 .tb { color: var(--vert); }
-.te { color: var(--orange); }
+.te { color: var(--orange-fonce); }
 
 .site h3 {
   font-family: var(--font-display);
@@ -615,7 +624,7 @@ nav {
 }
 .yv { background: var(--bleu); }
 .yb { background: var(--vert); }
-.yo { background: var(--orange); }
+.yo { background: var(--orange-fonce); }
 
 .site ul { list-style: none; }
 .site li {
@@ -655,7 +664,7 @@ nav {
   padding: 0.42rem 1rem; border-radius: 40px;
   transition: border-color var(--transition), color var(--transition);
 }
-.p-pill:hover { border-color: var(--orange); color: var(--orange); }
+.p-pill:hover { border-color: var(--orange-fonce); color: var(--orange-fonce); }
 
 /* ─────────────────────────────────────────
    FOOTER
@@ -670,10 +679,10 @@ footer {
   font-family: var(--font-display);
   font-size: 1.05rem; font-weight: 700; color: var(--noir);
 }
-.f-brand em { font-style: italic; font-weight: 400; color: var(--orange); }
+.f-brand em { font-style: italic; font-weight: 400; color: var(--orange-fonce); }
 .f-left {
   font-family: var(--font-body);
-  font-size: 0.82rem; color: var(--gris2); font-weight: 400;
+  font-size: 0.82rem; color: var(--gris); font-weight: 400;
   line-height: 1.6;
 }
 .f-left strong { color: var(--gris); font-weight: 600; }
@@ -835,19 +844,19 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) ro
   <div class="enjeux-grid">
     <div class="enjeu e1 reveal">
       <div class="enjeu-bar"></div>
-      <div class="enjeu-n">1</div>
+      <div class="enjeu-n" aria-hidden="true">1</div>
       <h3>Le milieu scolaire se retire</h3>
       <p>Dans les écoles rurales et en région, les cours de musique disparaissent ou cèdent la place au sport et à l'art dramatique. Les enseignants spécialisés peinent à constituer une tâche complète.</p>
     </div>
     <div class="enjeu e2 reveal reveal-delay-1">
       <div class="enjeu-bar"></div>
-      <div class="enjeu-n">2</div>
+      <div class="enjeu-n" aria-hidden="true">2</div>
       <h3>Les organismes communautaires s'essoufflent</h3>
       <p>Les harmonies et orchestres, ancrés dans leur communauté depuis des décennies, manquent de relève. Le pont entre le milieu scolaire et la pratique amateur collective s'est rompu.</p>
     </div>
     <div class="enjeu e3 reveal reveal-delay-2">
       <div class="enjeu-bar"></div>
-      <div class="enjeu-n">3</div>
+      <div class="enjeu-n" aria-hidden="true">3</div>
       <h3>Les familles font face à des barrières réelles</h3>
       <p>Coût des cours privés, achat d'un instrument, logistique familiale : la pratique musicale régulière est inaccessible pour une majorité de familles, en particulier en milieu rural ou défavorisé.</p>
     </div>
@@ -880,9 +889,9 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) ro
         <text x="557" y="258" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="14" font-weight="700" fill="#fff">MILIEU SCOLAIRE</text>
         <text x="557" y="273" text-anchor="middle" font-family="Lora,Georgia,serif" font-size="10" font-weight="400" fill="rgba(255,255,255,0.6)">Services de garde · Écoles</text>
         <text x="557" y="286" text-anchor="middle" font-family="Lora,Georgia,serif" font-size="10" font-weight="400" fill="rgba(255,255,255,0.6)">Élèves là où ils se trouvent</text>
-        <rect x="230" y="148" width="220" height="58" rx="8" fill="#e8762a"/>
+        <rect x="230" y="148" width="220" height="58" rx="8" fill="#b35310"/>
         <text x="340" y="171" text-anchor="middle" font-family="Lora,Georgia,serif" font-size="9" font-weight="700" fill="#fff" letter-spacing="1.5">COORDINATION</text>
-        <text x="340" y="186" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="12" font-style="italic" font-weight="400" fill="rgba(255,255,255,0.9)">Clé de voûte du projet</text>
+        <text x="340" y="186" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="12" font-style="italic" font-weight="400" fill="#fff">Clé de voûte du projet</text>
       </svg>
     </div>
 
