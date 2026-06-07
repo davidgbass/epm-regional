@@ -1,0 +1,6 @@
+# Scripts contenant un token — ne jamais pousser
+deploy-epm.sh
+embed-photo.sh
+
+# Config locale Claude
+.claude/

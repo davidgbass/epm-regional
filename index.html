@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EPM Régional — La musique partout au Québec</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+
+/* ─────────────────────────────────────────
+   RESET + TOKENS
+───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --creme:   #f5f0e8;
+  --creme2:  #ede6d6;
+  --creme3:  #e4dbc8;
+  --orange:  #e8762a;
+  --orange2: #f5a05a;
+  --noir:    #1a1a14;
+  --gris:    #5a5548;
+  --gris2:   #9a9080;
+  --gris3:   #d4cbba;
+  --blanc:   #ffffff;
+  --bleu:    #1f6f9a;
+  --vert:    #3a7d44;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Lora', Georgia, serif;
+
+  --max-w: 920px;
+  --pad-x: clamp(1.2rem, 5vw, 2.5rem);
+  --radius: 12px;
+  --transition: 0.22s ease;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--creme);
+  font-family: var(--font-body);
+  color: var(--noir);
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+/* ─────────────────────────────────────────
+   GRAIN TEXTURE OVERLAY
+───────────────────────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px;
+}
+
+/* ─────────────────────────────────────────
+   NAV
+───────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--pad-x);
+  background: rgba(245, 240, 232, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(212, 203, 186, 0.6);
+  transition: background var(--transition);
+}
+
+.nav-brand {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-display);
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--noir);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.nav-brand em { font-style: italic; font-weight: 400; color: var(--orange); }
+
+.nav-logo {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--orange);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: #fff;
+  flex-shrink: 0;
+}
+
+.nav-links {
+  display: flex; gap: 2rem; list-style: none;
+  align-items: center;
+}
+.nav-links a {
+  font-family: var(--font-body);
+  font-size: 0.82rem; font-weight: 500;
+  color: var(--gris);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color var(--transition);
+}
+.nav-links a:hover { color: var(--orange); }
+
+.nav-cta {
+  background: var(--orange); color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.8rem; font-weight: 600;
+  padding: 0.5rem 1.2rem;
+  border-radius: 40px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: background var(--transition), transform 0.15s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: #c96018; transform: translateY(-1px); }
+
+/* Hamburger */
+.nav-hamburger {
+  display: none;
+  flex-direction: column; justify-content: center; gap: 5px;
+  width: 40px; height: 40px;
+  background: none; border: none; cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background var(--transition);
+}
+.nav-hamburger:hover { background: var(--creme2); }
+.nav-hamburger span {
+  display: block; height: 2px; border-radius: 2px;
+  background: var(--noir);
+  transition: transform 0.3s, opacity 0.2s;
+}
+
+/* Mobile drawer */
+.nav-drawer {
+  position: fixed; inset: 0; z-index: 190;
+  background: var(--creme);
+  display: flex; flex-direction: column;
+  padding: 80px var(--pad-x) 2rem;
+  gap: 0.5rem;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+}
+.nav-drawer.open { transform: translateX(0); }
+.nav-drawer a {
+  font-family: var(--font-display);
+  font-size: 1.6rem; font-weight: 600;
+  color: var(--noir);
+  text-decoration: none;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--gris3);
+  letter-spacing: -0.01em;
+  transition: color var(--transition);
+}
+.nav-drawer a:hover { color: var(--orange); }
+.nav-drawer .drawer-cta {
+  margin-top: 1.5rem;
+  display: inline-block;
+  background: var(--orange); color: #fff;
+  font-family: var(--font-body);
+  font-size: 1rem; font-weight: 600;
+  padding: 0.85rem 2rem;
+  border-radius: 40px;
+  text-decoration: none;
+  text-align: center;
+  width: fit-content;
+  transition: background var(--transition);
+}
+.nav-drawer .drawer-cta:hover { background: #c96018; }
+
+/* ─────────────────────────────────────────
+   HERO — PLEIN ÉCRAN PHOTO
+───────────────────────────────────────── */
+.hero {
+  position: relative;
+  height: 88vh;
+  min-height: 560px;
+  max-height: 900px;
+  overflow: hidden;
+  display: flex; align-items: flex-end;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+}
+.hero-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  transform: scale(1.04);
+  animation: heroZoom 12s ease forwards;
+}
+
+@keyframes heroZoom {
+  from { transform: scale(1.04); }
+  to   { transform: scale(1.0); }
+}
+
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(26,26,20,0.08) 0%,
+    rgba(26,26,20,0.25) 45%,
+    rgba(26,26,20,0.82) 100%
+  );
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  width: 100%;
+  padding: 0 var(--pad-x) 3.5rem;
+  max-width: calc(var(--max-w) + 2 * var(--pad-x));
+  margin: 0 auto;
+}
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-body);
+  font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 1.2rem;
+  animation: fadeUp 0.9s 0.2s ease both;
+}
+.hero-tag-dot {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--orange);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.58rem; font-weight: 700; color: #fff;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5.5vw, 5rem);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin-bottom: 0.15em;
+  animation: fadeUp 0.9s 0.35s ease both;
+}
+.hero h1 em {
+  display: block;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--orange2);
+}
+
+.hero-sub {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.6;
+  max-width: 560px;
+  margin-top: 1.2rem;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.9s 0.5s ease both;
+}
+
+.hero-actions {
+  display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
+  animation: fadeUp 0.9s 0.65s ease both;
+}
+
+/* Scroll indicator */
+.hero-scroll {
+  position: absolute; bottom: 1.5rem; right: var(--pad-x);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  font-family: var(--font-body);
+  font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  animation: fadeUp 1s 1s ease both;
+}
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { transform: scaleY(1); opacity: 1; }
+  50% { transform: scaleY(0.6); opacity: 0.4; }
+}
+
+/* ─────────────────────────────────────────
+   INTRO BAND (below hero)
+───────────────────────────────────────── */
+.intro-band {
+  background: var(--noir);
+  padding: 2.5rem var(--pad-x);
+}
+.intro-band-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 2rem; flex-wrap: wrap;
+}
+.intro-band p {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  color: rgba(255,255,255,0.75);
+  font-weight: 400;
+  line-height: 1.65;
+  max-width: 580px;
+}
+.intro-band p strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────────
+   BUTTONS
+───────────────────────────────────────── */
+.btn-primary {
+  background: var(--orange); color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.9rem; font-weight: 600;
+  padding: 0.78rem 1.8rem; border-radius: 40px;
+  text-decoration: none; letter-spacing: 0.01em;
+  transition: background var(--transition), transform 0.15s;
+  display: inline-block;
+  min-height: 44px; /* accessibility touch target */
+}
+.btn-primary:hover { background: #c96018; transform: translateY(-1px); }
+
+.btn-ghost {
+  font-family: var(--font-body);
+  font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  border-bottom: 1.5px solid rgba(255,255,255,0.35);
+  padding-bottom: 2px;
+  transition: color var(--transition), border-color var(--transition);
+  min-height: 44px; display: inline-flex; align-items: center;
+}
+.btn-ghost:hover { color: #fff; border-color: rgba(255,255,255,0.8); }
+
+/* ─────────────────────────────────────────
+   DIVIDER
+───────────────────────────────────────── */
+.divider {
+  max-width: var(--max-w); margin: 0 auto;
+  height: 1px; background: var(--gris3);
+}
+
+/* ─────────────────────────────────────────
+   SECTION WRAPPER
+───────────────────────────────────────── */
+.section {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 5rem var(--pad-x);
+}
+
+/* Section label */
+.sec-label {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 2.2rem;
+}
+.sec-num {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--orange);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.62rem; font-weight: 700; color: #fff; flex-shrink: 0;
+}
+.sec-txt {
+  font-family: var(--font-body);
+  font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gris2);
+}
+
+/* Section headline */
+.sec-headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3.8vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  color: var(--noir);
+  margin-bottom: 0.4em;
+}
+.sec-headline em {
+  font-style: italic; font-weight: 400;
+  color: var(--orange);
+}
+
+/* ─────────────────────────────────────────
+   ANIMATION: FADE UP ON SCROLL
+───────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ─────────────────────────────────────────
+   ENJEUX
+───────────────────────────────────────── */
+.enjeux-intro {
+  font-family: var(--font-body);
+  font-size: 1.05rem; font-weight: 400;
+  color: var(--gris); line-height: 1.75;
+  max-width: 580px; margin-bottom: 3rem;
+}
+
+.enjeux-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--gris3);
+  border: 1px solid var(--gris3);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.enjeu {
+  background: var(--blanc);
+  padding: 2.2rem 1.8rem;
+  transition: background var(--transition);
+}
+.enjeu:hover { background: #faf8f4; }
+
+.enjeu-bar {
+  height: 3px; border-radius: 2px;
+  margin-bottom: 1.8rem;
+}
+.e1 .enjeu-bar { background: var(--orange); }
+.e2 .enjeu-bar { background: var(--bleu); }
+.e3 .enjeu-bar { background: var(--vert); }
+
+.enjeu-n {
+  font-family: var(--font-display);
+  font-size: 3.5rem; font-weight: 700;
+  color: var(--creme3);
+  line-height: 1; margin-bottom: 0.8rem;
+}
+
+.enjeu h3 {
+  font-family: var(--font-display);
+  font-size: 1.12rem; font-weight: 600;
+  color: var(--noir);
+  margin-bottom: 0.8rem; line-height: 1.25;
+}
+
+.enjeu p {
+  font-family: var(--font-body);
+  font-size: 0.92rem; color: var(--gris);
+  line-height: 1.75; font-weight: 400;
+}
+
+/* ─────────────────────────────────────────
+   MODÈLE (dark section)
+───────────────────────────────────────── */
+.modele-bg {
+  background: var(--noir);
+  padding: 5rem 0;
+}
+.modele-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  padding: 0 var(--pad-x);
+}
+.modele-inner .sec-txt { color: rgba(255,255,255,0.35); }
+.modele-inner .sec-headline { color: #fff; }
+.modele-inner .sec-headline em { color: var(--orange2); }
+
+/* Triangle SVG */
+.tri-container {
+  margin: 3rem 0;
+  display: flex; justify-content: center;
+}
+.tri-container svg { width: 100%; max-width: 680px; height: auto; }
+
+/* Coord bloc */
+.coord-bloc {
+  background: var(--orange);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+.coord-title {
+  font-family: var(--font-display);
+  font-size: 1.55rem; font-weight: 700; font-style: italic;
+  color: #fff; line-height: 1.2; margin-bottom: 1rem;
+}
+.coord-text {
+  font-family: var(--font-body);
+  font-size: 0.95rem; color: rgba(255,255,255,0.9);
+  font-weight: 400; line-height: 1.75;
+}
+.coord-aside {
+  border-left: 1.5px solid rgba(255,255,255,0.3);
+  padding-left: 2rem;
+  display: flex; flex-direction: column; gap: 1.4rem;
+}
+.coord-lbl {
+  font-family: var(--font-body);
+  font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); margin-bottom: 5px;
+}
+.coord-val {
+  font-family: var(--font-body);
+  font-size: 0.92rem; color: #fff;
+  font-weight: 400; line-height: 1.65;
+}
+
+/* ─────────────────────────────────────────
+   SOLUTION
+───────────────────────────────────────── */
+.sol-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem; margin-top: 2rem;
+}
+.sol {
+  background: var(--blanc);
+  border-radius: var(--radius);
+  padding: 2rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.sol:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(26,26,20,0.08);
+}
+.sol-bar { height: 3px; border-radius: 2px; margin-bottom: 1.2rem; }
+.s1 .sol-bar { background: var(--orange); }
+.s2 .sol-bar { background: var(--bleu); }
+.s3 .sol-bar { background: var(--vert); }
+.s4 .sol-bar { background: var(--noir); }
+.sol h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem; font-weight: 600;
+  color: var(--noir); margin-bottom: 0.7rem; line-height: 1.25;
+}
+.sol p {
+  font-family: var(--font-body);
+  font-size: 0.92rem; color: var(--gris);
+  line-height: 1.75; font-weight: 400;
+}
+
+/* ─────────────────────────────────────────
+   TERRAIN
+───────────────────────────────────────── */
+.terrain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem; margin-top: 2rem;
+}
+.site {
+  background: var(--blanc);
+  border-radius: var(--radius);
+  padding: 1.8rem;
+  border-top: 4px solid var(--gris3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.site:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(26,26,20,0.08);
+}
+.sv { border-top-color: var(--bleu); }
+.sb { border-top-color: var(--vert); }
+.se { border-top-color: var(--orange); }
+
+.site-tag {
+  font-family: var(--font-body);
+  font-size: 0.63rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.tv { color: var(--bleu); }
+.tb { color: var(--vert); }
+.te { color: var(--orange); }
+
+.site h3 {
+  font-family: var(--font-display);
+  font-size: 1.12rem; font-weight: 700;
+  color: var(--noir); line-height: 1.2; margin-bottom: 0.8rem;
+}
+.yr {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.65rem; font-weight: 600;
+  color: #fff; padding: 4px 10px;
+  border-radius: 20px; margin-bottom: 1rem;
+}
+.yv { background: var(--bleu); }
+.yb { background: var(--vert); }
+.yo { background: var(--orange); }
+
+.site ul { list-style: none; }
+.site li {
+  font-family: var(--font-body);
+  font-size: 0.88rem; color: var(--gris);
+  font-weight: 400; line-height: 1.7;
+  padding-left: 1em; position: relative;
+}
+.site li::before {
+  content: "·"; position: absolute; left: 0;
+  color: var(--gris3); font-weight: 700;
+}
+
+/* ─────────────────────────────────────────
+   PARTENAIRES
+───────────────────────────────────────── */
+.partenaires-bg {
+  background: var(--creme2);
+  border-top: 1px solid var(--gris3);
+  border-bottom: 1px solid var(--gris3);
+  padding: 4rem 0;
+}
+.partenaires-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  padding: 0 var(--pad-x);
+}
+.p-list {
+  display: flex; flex-wrap: wrap; gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+.p-pill {
+  font-family: var(--font-body);
+  font-size: 0.84rem; font-weight: 400;
+  color: var(--gris);
+  background: var(--blanc);
+  border: 1px solid var(--gris3);
+  padding: 0.42rem 1rem; border-radius: 40px;
+  transition: border-color var(--transition), color var(--transition);
+}
+.p-pill:hover { border-color: var(--orange); color: var(--orange); }
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+footer {
+  padding: 3rem var(--pad-x);
+  max-width: var(--max-w); margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem;
+}
+.f-brand {
+  font-family: var(--font-display);
+  font-size: 1.05rem; font-weight: 700; color: var(--noir);
+}
+.f-brand em { font-style: italic; font-weight: 400; color: var(--orange); }
+.f-left {
+  font-family: var(--font-body);
+  font-size: 0.82rem; color: var(--gris2); font-weight: 400;
+  line-height: 1.6;
+}
+.f-left strong { color: var(--gris); font-weight: 600; }
+
+/* ─────────────────────────────────────────
+   RESPONSIVE — MOBILE
+───────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Nav */
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+
+  /* Hero */
+  .hero {
+    height: 92vh;
+    min-height: 520px;
+    align-items: flex-end;
+  }
+  .hero-bg img { object-position: center 20%; }
+  .hero h1 { font-size: clamp(2rem, 9vw, 3rem); }
+  .hero-sub { font-size: 0.95rem; display: none; }
+  .hero-scroll { display: none; }
+  .hero-content { padding-bottom: 2.5rem; }
+
+  /* Intro band */
+  .intro-band-inner { flex-direction: column; gap: 1rem; }
+
+  /* Sections */
+  .section { padding: 3.5rem var(--pad-x); }
+
+  /* Enjeux */
+  .enjeux-grid { grid-template-columns: 1fr; }
+  .enjeu { padding: 1.8rem 1.4rem; }
+
+  /* Modèle */
+  .modele-bg { padding: 3.5rem 0; }
+  .coord-bloc {
+    grid-template-columns: 1fr;
+    padding: 1.8rem; gap: 1.5rem;
+  }
+  .coord-aside {
+    border-left: none;
+    border-top: 1.5px solid rgba(255,255,255,0.25);
+    padding-left: 0; padding-top: 1.5rem;
+  }
+
+  /* Solutions */
+  .sol-grid { grid-template-columns: 1fr; }
+  .sol { padding: 1.6rem; }
+
+  /* Terrain */
+  .terrain-grid { grid-template-columns: 1fr; }
+
+  /* Partenaires */
+  .partenaires-bg { padding: 3rem 0; }
+
+  /* Footer */
+  footer { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 1.95rem; letter-spacing: -0.025em; }
+  .sec-headline { font-size: 1.65rem; }
+  .nav-cta { font-size: 0.74rem; padding: 0.42rem 0.9rem; }
+  .btn-primary { font-size: 0.86rem; padding: 0.72rem 1.5rem; }
+  .coord-title { font-size: 1.3rem; }
+}
+
+/* Hamburger open state */
+body.menu-open { overflow: hidden; }
+body.menu-open .nav-hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+body.menu-open .nav-hamburger span:nth-child(2) { opacity: 0; }
+body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+</style>
+</head>
+<body>
+
+<!-- ── MOBILE DRAWER ── -->
+<div class="nav-drawer" id="drawer" role="dialog" aria-label="Menu navigation">
+  <a href="#mission" onclick="closeMenu()">Mission</a>
+  <a href="#modele" onclick="closeMenu()">Modèle</a>
+  <a href="#action" onclick="closeMenu()">En action</a>
+  <a href="#soutien" onclick="closeMenu()">Soutien</a>
+  <a href="#soutien" class="drawer-cta" onclick="closeMenu()">Faire un don →</a>
+</div>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="nav-brand">
+    <div class="nav-logo">♩</div>
+    EPM <em>&nbsp;Régional</em>
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#modele">Modèle</a></li>
+    <li><a href="#action">En action</a></li>
+    <li><a href="#soutien">Soutien</a></li>
+  </ul>
+  <a href="#soutien" class="nav-cta">Faire un don →</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="drawer">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="mission">
+  <div class="hero-bg">
+    <img
+      src="photo-groupe.jpg"
+      alt="Les élèves du projet Nouveau Souffle avec leurs instruments, Val-des-Sources"
+      loading="eager"
+      fetchpriority="high"
+    >
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="hero-tag-dot">01</span>
+      École préparatoire de musique · UQAM · Antenne Estrie
+    </div>
+    <h1>
+      La musique là où<br>les enfants se trouvent.
+      <em>Partout au Québec.</em>
+    </h1>
+    <p class="hero-sub">
+      Un modèle parascolaire ancré dans les communautés rurales du Québec.
+    </p>
+    <div class="hero-actions">
+      <a href="#modele" class="btn-primary">Découvrir le modèle →</a>
+      <a href="#action" class="btn-ghost">Voir le projet en action</a>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── INTRO BAND ── -->
+<div class="intro-band">
+  <div class="intro-band-inner">
+    <p>
+      Un modèle parascolaire qui allie les organismes culturels communautaires, les milieux scolaires et la rigueur pédagogique de l'UQAM — <strong>pour que la pratique musicale collective ne soit plus réservée aux familles qui peuvent se la payer.</strong>
+    </p>
+    <a href="#soutien" class="nav-cta" style="flex-shrink:0;">Soutenir le projet →</a>
+  </div>
+</div>
+
+<!-- ── ENJEUX ── -->
+<section class="section" id="enjeux">
+  <div class="sec-label reveal">
+    <span class="sec-num">02</span>
+    <span class="sec-txt">Pourquoi ce projet est nécessaire</span>
+  </div>
+  <h2 class="sec-headline reveal reveal-delay-1">Trois enjeux.<br><em>Une solution.</em></h2>
+  <p class="enjeux-intro reveal reveal-delay-2">
+    L'accès à la formation musicale au Québec est compromis par trois réalités qui se renforcent mutuellement — et auxquelles le projet EPM Régional répond de front.
+  </p>
+  <div class="enjeux-grid">
+    <div class="enjeu e1 reveal">
+      <div class="enjeu-bar"></div>
+      <div class="enjeu-n">1</div>
+      <h3>Le milieu scolaire se retire</h3>
+      <p>Dans les écoles rurales et en région, les cours de musique disparaissent ou cèdent la place au sport et à l'art dramatique. Les enseignants spécialisés peinent à constituer une tâche complète.</p>
+    </div>
+    <div class="enjeu e2 reveal reveal-delay-1">
+      <div class="enjeu-bar"></div>
+      <div class="enjeu-n">2</div>
+      <h3>Les organismes communautaires s'essoufflent</h3>
+      <p>Les harmonies et orchestres, ancrés dans leur communauté depuis des décennies, manquent de relève. Le pont entre le milieu scolaire et la pratique amateur collective s'est rompu.</p>
+    </div>
+    <div class="enjeu e3 reveal reveal-delay-2">
+      <div class="enjeu-bar"></div>
+      <div class="enjeu-n">3</div>
+      <h3>Les familles font face à des barrières réelles</h3>
+      <p>Coût des cours privés, achat d'un instrument, logistique familiale : la pratique musicale régulière est inaccessible pour une majorité de familles, en particulier en milieu rural ou défavorisé.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── MODÈLE ── -->
+<div class="modele-bg" id="modele">
+  <div class="modele-inner">
+    <div class="sec-label reveal">
+      <span class="sec-num">03</span>
+      <span class="sec-txt">Le modèle</span>
+    </div>
+    <h2 class="sec-headline reveal reveal-delay-1">Trois pôles.<br><em>Un arrimage.</em></h2>
+
+    <div class="tri-container reveal">
+      <svg viewBox="0 0 680 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schéma des trois pôles : EPM-UQAM, Organismes, Milieu scolaire">
+        <line x1="340" y1="30" x2="80" y2="262" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <line x1="340" y1="30" x2="600" y2="262" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <line x1="80" y1="262" x2="600" y2="262" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <rect x="206" y="8" width="268" height="72" rx="10" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+        <text x="340" y="33" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="15" font-weight="700" fill="#fff">EPM-UQAM</text>
+        <text x="340" y="50" text-anchor="middle" font-family="Lora,Georgia,serif" font-size="10" font-weight="400" fill="rgba(255,255,255,0.6)">Coordination · Logistique · Inscriptions</text>
+        <text x="340" y="64" text-anchor="middle" font-family="Lora,Georgia,serif" font-size="10" font-weight="400" fill="rgba(255,255,255,0.6)">Pérennité institutionnelle</text>
+        <rect x="8" y="234" width="230" height="68" rx="10" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+        <text x="123" y="258" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="14" font-weight="700" fill="#fff">ORGANISMES</text>
+        <text x="123" y="273" text-anchor="middle" font-family="Lora,Georgia,serif" font-size="10" font-weight="400" fill="rgba(255,255,255,0.6)">Harmonies · Orchestres régionaux</text>
+        <text x="123" y="286" text-anchor="middle" font-family="Lora,Georgia,serif" font-size="10" font-weight="400" fill="rgba(255,255,255,0.6)">Instruments · Locaux · Réseaux</text>
+        <rect x="442" y="234" width="230" height="68" rx="10" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+        <text x="557" y="258" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="14" font-weight="700" fill="#fff">MILIEU SCOLAIRE</text>
+        <text x="557" y="273" text-anchor="middle" font-family="Lora,Georgia,serif" font-size="10" font-weight="400" fill="rgba(255,255,255,0.6)">Services de garde · Écoles</text>
+        <text x="557" y="286" text-anchor="middle" font-family="Lora,Georgia,serif" font-size="10" font-weight="400" fill="rgba(255,255,255,0.6)">Élèves là où ils se trouvent</text>
+        <rect x="230" y="148" width="220" height="58" rx="8" fill="#e8762a"/>
+        <text x="340" y="171" text-anchor="middle" font-family="Lora,Georgia,serif" font-size="9" font-weight="700" fill="#fff" letter-spacing="1.5">COORDINATION</text>
+        <text x="340" y="186" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="12" font-style="italic" font-weight="400" fill="rgba(255,255,255,0.9)">Clé de voûte du projet</text>
+      </svg>
+    </div>
+
+    <div class="coord-bloc reveal">
+      <div class="coord-main">
+        <div class="coord-title">Une ressource,<br>un rôle irremplaçable.</div>
+        <p class="coord-text">Une personne professionnelle dédiée fait le pont entre les trois pôles. Elle doit posséder la sensibilité, les connaissances et le doigté nécessaires pour assurer, au fil de l'expansion du projet, la cohésion entre le milieu bénévole communautaire et les ressources à sa disposition — ce qui exige stabilité et rémunération adéquate.</p>
+      </div>
+      <div class="coord-aside">
+        <div>
+          <div class="coord-lbl">Pour les bénévoles</div>
+          <div class="coord-val">Opérer à leur plein potentiel, sans surcharge — rester dans leur zone d'efficacité maximale.</div>
+        </div>
+        <div>
+          <div class="coord-lbl">Pour les enseignants</div>
+          <div class="coord-val">Un milieu stimulant, une rémunération adéquate — condition première de la pérennité du projet.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SOLUTION ── -->
+<section class="section" id="soutien">
+  <div class="sec-label reveal">
+    <span class="sec-num">04</span>
+    <span class="sec-txt">Ce que le projet met en place</span>
+  </div>
+  <h2 class="sec-headline reveal reveal-delay-1">Ce qui change,<br><em>concrètement.</em></h2>
+  <div class="sol-grid">
+    <div class="sol s1 reveal">
+      <div class="sol-bar"></div>
+      <h4>Cours collectifs au service de garde</h4>
+      <p>Les enfants n'ont pas à se déplacer — la musique vient à eux, dans leur milieu, avec régularité tout au long de l'année scolaire.</p>
+    </div>
+    <div class="sol s2 reveal reveal-delay-1">
+      <div class="sol-bar"></div>
+      <h4>Enseignants coordonnés et bien rémunérés</h4>
+      <p>L'EPM-UQAM coordonne les ressources pédagogiques et assure la logistique administrative des inscriptions. Les enseignants affiliés travaillent dans un milieu stimulant avec une rémunération adéquate.</p>
+    </div>
+    <div class="sol s3 reveal reveal-delay-2">
+      <div class="sol-bar"></div>
+      <h4>Un tarif volontairement abordable</h4>
+      <p>Comme une bibliothèque ou une patinoire municipale : un investissement collectif. Le modèle est intentionnellement déficitaire — pour rester accessible à tous les enfants qui démontrent un intérêt.</p>
+    </div>
+    <div class="sol s4 reveal reveal-delay-3">
+      <div class="sol-bar"></div>
+      <h4>Une filière générationnelle</h4>
+      <p>La pérennité est la condition sine qua non : les cohortes progressent ensemble sur plusieurs années. Les plus jeunes voient les plus âgés évoluer — un effet d'entraînement naturel, de la première note à l'orchestre communautaire adulte.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── TERRAIN ── -->
+<section class="section" id="action">
+  <div class="sec-label reveal">
+    <span class="sec-num">05</span>
+    <span class="sec-txt">Le projet en action</span>
+  </div>
+  <h2 class="sec-headline reveal reveal-delay-1">Trois pôles<br><em>de déploiement.</em></h2>
+  <div class="terrain-grid">
+    <div class="site sv reveal">
+      <div class="site-tag tv">Val-des-Sources</div>
+      <h3>Nouveau Souffle</h3>
+      <span class="yr yv">Année 3 — En opération</span>
+      <ul>
+        <li>Milieu rural défavorisé, multiples points de service</li>
+        <li>L'Escale · Le Tournesol · Wotton · Windsor</li>
+        <li>Harmonie Val-des-Sources (95 ans d'existence)</li>
+        <li>Expansion en cours : Danville et Saint-Camille</li>
+      </ul>
+    </div>
+    <div class="site sb reveal reveal-delay-1">
+      <div class="site-tag tb">Brome-Missisquoi</div>
+      <h3>Big Band — La Chantignolle</h3>
+      <span class="yr yb">Année 1 — Printemps 2026</span>
+      <ul>
+        <li>Cours choral au printemps 2026</li>
+        <li>Année 2 : Choral + Drumline et/ou Ensemble Jazz Pop</li>
+        <li>Démarchage auprès des autres services de garde de la CSS</li>
+      </ul>
+    </div>
+    <div class="site se reveal reveal-delay-2">
+      <div class="site-tag te">Expansion</div>
+      <h3>Estrie et au-delà</h3>
+      <span class="yr yo">En développement</span>
+      <ul>
+        <li>Grand intérêt de la Fédération des harmonies et orchestres symphoniques du Québec</li>
+        <li>Partenariat exploré — Orchestre symphonique de Drummondville</li>
+        <li>Amorce de discussion — Harmonie de Sorel</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── PARTENAIRES ── -->
+<div class="partenaires-bg">
+  <div class="partenaires-inner">
+    <div class="sec-label reveal">
+      <span class="sec-num">06</span>
+      <span class="sec-txt">Partenaires</span>
+    </div>
+    <div class="p-list reveal">
+      <span class="p-pill">École préparatoire de musique · UQAM</span>
+      <span class="p-pill">Harmonie Val-des-Sources</span>
+      <span class="p-pill">Fédération des harmonies et orchestres symphoniques du Québec</span>
+      <span class="p-pill">Orchestre symphonique de Drummondville</span>
+      <span class="p-pill">La Chantignolle · Bromont</span>
+      <span class="p-pill">CSS des Sommets</span>
+      <span class="p-pill">Caisse Desjardins</span>
+      <span class="p-pill">Long McQuade</span>
+      <span class="p-pill">Twig Music</span>
+      <span class="p-pill">Ville de Val-des-Sources</span>
+      <span class="p-pill">MRC des Sources</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="f-brand">EPM <em>Régional</em></div>
+  <div class="f-left">
+    <strong>Reçus officiels aux fins d'impôt</strong> émis via la Fondation UQAM<br>
+    epm.uqam.ca · Document destiné aux fondations · 2026
+  </div>
+</footer>
+
+<script>
+// ── Hamburger menu ──
+const hamburger = document.getElementById('hamburger');
+const drawer = document.getElementById('drawer');
+
+function openMenu() {
+  drawer.classList.add('open');
+  document.body.classList.add('menu-open');
+  hamburger.setAttribute('aria-expanded', 'true');
+  hamburger.setAttribute('aria-label', 'Fermer le menu');
+}
+function closeMenu() {
+  drawer.classList.remove('open');
+  document.body.classList.remove('menu-open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  hamburger.setAttribute('aria-label', 'Ouvrir le menu');
+}
+hamburger.addEventListener('click', () => {
+  drawer.classList.contains('open') ? closeMenu() : openMenu();
+});
+// Close on Escape
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+// ── Scroll reveal ──
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
