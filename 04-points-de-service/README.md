@@ -13,7 +13,7 @@ Suivi du déploiement par région. Chaque point de service est un maillon de la 
 ## Brome-Missisquoi (an 1)
 
 - **Contexte** : offre parascolaire déjà établie, mais pas du côté culturel ; objectif = rendre la musique aussi attrayante que le sport, en contexte non compétitif.
-- **Pôle** : Big Band La Chantignolle (Bromont).
+- **Pôle** : Big Band La Chantignole (Bromont).
 - **Déploiement** : cours choral (printemps 2026) → an 2 : choral + drumline et/ou jazz pop.
 - **Démarchage** : services de garde de la CSS.
 

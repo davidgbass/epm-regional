@@ -35,7 +35,7 @@ La **coordination** est la clé de voûte : une ressource dédiée et rémunér�
 ## Le projet en action (2026)
 
 - **Val-des-Sources** — projet *Nouveau Souffle*, an 3, milieu rural défavorisé. Écoles L'Escale, Le Tournesol, Wotton, Windsor. Harmonie VDS (95 ans). Expansion : Danville, Saint-Camille.
-- **Brome-Missisquoi** — Big Band La Chantignolle (Bromont), an 1. Cours choral (printemps 2026), puis drumline et/ou jazz pop.
+- **Brome-Missisquoi** — Big Band La Chantignole (Bromont), an 1. Cours choral (printemps 2026), puis drumline et/ou jazz pop.
 - **Expansion Estrie et au-delà** — intérêt marqué de la Fédération des harmonies et orchestres symphoniques du Québec ; amorce avec l'OSD (Drummondville) et l'Harmonie de Sorel.
 
 ---
@@ -52,6 +52,6 @@ La **coordination** est la clé de voûte : une ressource dédiée et rémunér�
 
 ## Partenaires
 
-École préparatoire de musique · UQAM — Harmonie Val-des-Sources — Fédération des harmonies et orchestres symphoniques du Québec — OSD (Drummondville) — La Chantignolle (Bromont) — CSS des Sommets — Caisse Desjardins — Long & McQuade — Twig Music — Ville de Val-des-Sources — MRC des Sources
+École préparatoire de musique · UQAM — Harmonie Val-des-Sources — Fédération des harmonies et orchestres symphoniques du Québec — OSD (Drummondville) — La Chantignole (Bromont) — CSS des Sommets — Caisse Desjardins — Long & McQuade — Twig Music — Ville de Val-des-Sources — MRC des Sources
 
 > Reçus fiscaux via la **Fondation UQAM**. — `epm.uqam.ca`

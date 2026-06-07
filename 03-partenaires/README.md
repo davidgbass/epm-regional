@@ -12,7 +12,7 @@ Fiches des organismes et institutions partenaires du projet EPM Régional.
 - **Harmonie Val-des-Sources** (95 ans) — ancrage local, instruments, locaux, réseau.
 - **Fédération des harmonies et orchestres symphoniques du Québec** — partenaire stratégique ; fort intérêt pour le déploiement provincial.
 - **Orchestre symphonique de Drummondville (OSD)** — pont entre institution culturelle et futur public.
-- **La Chantignolle** (Bromont) — Big Band, pôle Brome-Missisquoi.
+- **La Chantignole** (Bromont) — Big Band, pôle Brome-Missisquoi.
 - **Harmonie de Sorel** — amorce de partenariat.
 
 ## Pôle scolaire
