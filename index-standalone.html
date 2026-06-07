@@ -397,8 +397,8 @@ nav {
 }
 .sec-txt {
   font-family: var(--font-body);
-  font-size: 0.68rem; font-weight: 600;
-  letter-spacing: 0.22em; text-transform: uppercase;
+  font-size: 0.74rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--gris);
 }
 
@@ -508,12 +508,66 @@ nav {
 .modele-inner .sec-headline { color: #fff; }
 .modele-inner .sec-headline em { color: var(--orange2); }
 
-/* Triangle SVG */
-.tri-container {
-  margin: 3rem 0;
-  display: flex; justify-content: center;
+/* Schéma des 3 pôles — HTML responsive (remplace l'ancien SVG à police fixe) */
+.poles {
+  margin: 3rem auto 0;
+  max-width: 720px;
+  display: flex; flex-direction: column; align-items: stretch;
+  gap: 0.9rem;
 }
-.tri-container svg { width: 100%; max-width: 680px; height: auto; }
+.pole {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+}
+.pole-tag {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.74rem; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 0.55rem;
+}
+.pole h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 3.2vw, 1.6rem); font-weight: 700;
+  color: #fff; line-height: 1.15; margin-bottom: 0.5rem;
+}
+.pole p {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 2.1vw, 1.05rem); font-weight: 400;
+  color: rgba(255,255,255,0.82); line-height: 1.6;
+}
+.poles-base {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem;
+}
+.poles-link {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.82rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+}
+.coord-node {
+  background: var(--orange-fonce);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+}
+.coord-node .k {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: #fff; margin-bottom: 0.35rem;
+}
+.coord-node .t {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.8vw, 1.45rem); font-weight: 400; font-style: italic;
+  color: #fff; line-height: 1.2;
+}
 
 /* Coord bloc */
 .coord-bloc {
@@ -612,8 +666,8 @@ nav {
 
 .site-tag {
   font-family: var(--font-body);
-  font-size: 0.63rem; font-weight: 600;
-  letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
   margin-bottom: 0.4rem;
 }
 .tv { color: var(--bleu); }
@@ -628,8 +682,8 @@ nav {
 .yr {
   display: inline-block;
   font-family: var(--font-body);
-  font-size: 0.65rem; font-weight: 600;
-  color: #fff; padding: 4px 10px;
+  font-size: 0.72rem; font-weight: 600;
+  color: #fff; padding: 4px 11px;
   border-radius: 20px; margin-bottom: 1rem;
 }
 .yv { background: var(--bleu); }
@@ -639,7 +693,7 @@ nav {
 .site ul { list-style: none; }
 .site li {
   font-family: var(--font-body);
-  font-size: 0.88rem; color: var(--gris);
+  font-size: 0.94rem; color: var(--gris);
   font-weight: 400; line-height: 1.7;
   padding-left: 1em; position: relative;
 }
@@ -729,6 +783,7 @@ footer {
 
   /* Modèle */
   .modele-bg { padding: 3.5rem 0; }
+  .poles-base { grid-template-columns: 1fr; }
   .coord-bloc {
     grid-template-columns: 1fr;
     padding: 1.8rem; gap: 1.5rem;
@@ -766,6 +821,37 @@ body.menu-open { overflow: hidden; }
 body.menu-open .nav-hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 body.menu-open .nav-hamburger span:nth-child(2) { opacity: 0; }
 body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ─────────────────────────────────────────
+   IMPRESSION / EXPORT PDF (page continue)
+───────────────────────────────────────── */
+@media print {
+  /* Conserver fonds sombres et couleurs de marque à l'impression */
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  /* Masquer l'interactif inutile sur papier */
+  nav, .nav-drawer, .nav-hamburger, .hero-scroll { display: none !important; }
+  body::after { display: none !important; }            /* texture grain */
+
+  /* CRUCIAL : rendre visible tout le contenu animé (sinon pages blanches) */
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .hero-bg img { animation: none !important; transform: none !important; }
+  .hero h1, .hero-sub, .hero-tag { animation: none !important; }
+
+  /* Hero compact pour ne pas manger une page entière */
+  .hero { height: 70vh; min-height: 0; max-height: none; }
+
+  /* Ne pas couper les cartes/blocs au milieu d'une page */
+  .enjeu, .sol, .site, .coord-bloc, .pole, .coord-node,
+  .poles, .intro-band, footer {
+    break-inside: avoid; page-break-inside: avoid;
+  }
+  /* Aérer un peu moins en vertical */
+  .section { padding: 2.5rem var(--pad-x); }
+  .modele-bg, .partenaires-bg { padding: 2.5rem 0; }
+}
 
 </style>
 </head>
@@ -882,27 +968,30 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) ro
     </div>
     <h2 class="sec-headline reveal reveal-delay-1">Trois pôles.<br><em>Un arrimage.</em></h2>
 
-    <div class="tri-container reveal">
-      <svg viewBox="0 0 680 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schéma des trois pôles : EPM-UQAM, Organismes, Milieu scolaire">
-        <line x1="340" y1="30" x2="80" y2="262" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" stroke-dasharray="5,4"/>
-        <line x1="340" y1="30" x2="600" y2="262" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" stroke-dasharray="5,4"/>
-        <line x1="80" y1="262" x2="600" y2="262" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" stroke-dasharray="5,4"/>
-        <rect x="206" y="8" width="268" height="72" rx="10" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-        <text x="340" y="33" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="15" font-weight="700" fill="#fff">EPM-UQAM</text>
-        <text x="340" y="50" text-anchor="middle" font-family="Lora,Georgia,serif" font-size="10" font-weight="400" fill="rgba(255,255,255,0.6)">Coordination · Logistique · Inscriptions</text>
-        <text x="340" y="64" text-anchor="middle" font-family="Lora,Georgia,serif" font-size="10" font-weight="400" fill="rgba(255,255,255,0.6)">Pérennité institutionnelle</text>
-        <rect x="8" y="234" width="230" height="68" rx="10" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-        <text x="123" y="258" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="14" font-weight="700" fill="#fff">ORGANISMES</text>
-        <text x="123" y="273" text-anchor="middle" font-family="Lora,Georgia,serif" font-size="10" font-weight="400" fill="rgba(255,255,255,0.6)">Harmonies · Orchestres régionaux</text>
-        <text x="123" y="286" text-anchor="middle" font-family="Lora,Georgia,serif" font-size="10" font-weight="400" fill="rgba(255,255,255,0.6)">Instruments · Locaux · Réseaux</text>
-        <rect x="442" y="234" width="230" height="68" rx="10" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-        <text x="557" y="258" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="14" font-weight="700" fill="#fff">MILIEU SCOLAIRE</text>
-        <text x="557" y="273" text-anchor="middle" font-family="Lora,Georgia,serif" font-size="10" font-weight="400" fill="rgba(255,255,255,0.6)">Services de garde · Écoles</text>
-        <text x="557" y="286" text-anchor="middle" font-family="Lora,Georgia,serif" font-size="10" font-weight="400" fill="rgba(255,255,255,0.6)">Élèves là où ils se trouvent</text>
-        <rect x="230" y="148" width="220" height="58" rx="8" fill="#b35310"/>
-        <text x="340" y="171" text-anchor="middle" font-family="Lora,Georgia,serif" font-size="9" font-weight="700" fill="#fff" letter-spacing="1.5">COORDINATION</text>
-        <text x="340" y="186" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="12" font-style="italic" font-weight="400" fill="#fff">Clé de voûte du projet</text>
-      </svg>
+    <div class="poles reveal" role="group" aria-label="Les trois pôles, arrimés par la coordination">
+      <div class="pole">
+        <span class="pole-tag">Pôle institutionnel</span>
+        <h3>EPM–UQAM</h3>
+        <p>Coordination · Logistique · Inscriptions<br>Pérennité institutionnelle</p>
+      </div>
+      <div class="poles-link" aria-hidden="true">↓&nbsp;&nbsp;arrimés par&nbsp;&nbsp;↓</div>
+      <div class="coord-node">
+        <span class="k">Coordination</span>
+        <span class="t">Clé de voûte du projet</span>
+      </div>
+      <div class="poles-link" aria-hidden="true">↓&nbsp;&nbsp;au service de&nbsp;&nbsp;↓</div>
+      <div class="poles-base">
+        <div class="pole">
+          <span class="pole-tag">Communautés</span>
+          <h3>Organismes</h3>
+          <p>Harmonies · Orchestres régionaux<br>Instruments · Locaux · Réseaux</p>
+        </div>
+        <div class="pole">
+          <span class="pole-tag">Écoles</span>
+          <h3>Milieu scolaire</h3>
+          <p>Services de garde · Écoles<br>Élèves là où ils se trouvent</p>
+        </div>
+      </div>
     </div>
 
     <div class="coord-bloc reveal">
