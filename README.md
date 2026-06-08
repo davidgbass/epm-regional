@@ -10,7 +10,7 @@ Ce dépôt rassemble la documentation du projet : présentation aux fondations, 
 
 ## Le problème en trois axes
 
-1. **Le milieu scolaire se retire.** Dans les écoles rurales et en région, les cours de musique disparaissent ou cèdent la place au sport et à l'art dramatique. Les enseignants spécialisés peinent à constituer une tâche complète.
+1. **Le milieu scolaire se retire.** Dans les écoles, les cours de musique disparaissent ou cèdent la place au sport et à l'art dramatique. Les enseignants spécialisés peinent à constituer une tâche complète.
 2. **Les organismes communautaires s'essoufflent.** Les harmonies et orchestres, ancrés dans leur communauté depuis des décennies, manquent de relève. Le pont entre le milieu scolaire et la pratique amateur collective s'est rompu.
 3. **Les familles font face à des barrières réelles.** Coût des cours privés, achat d'un instrument, logistique familiale : la pratique musicale régulière est inaccessible pour une majorité de familles.
 
