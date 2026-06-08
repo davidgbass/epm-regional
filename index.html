@@ -1187,46 +1187,147 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) ro
 
   <!-- Carte schématique du sud du Québec -->
   <div class="qc-map-wrap reveal">
-    <svg class="qc-map" viewBox="0 0 760 430" role="img"
-         aria-label="Carte schématique du sud du Québec situant les deux pôles actifs (Val-des-Sources, Brome-Missisquoi) et les pôles en développement (Sorel, Drummondville, Laval, MRC Memphrémagog), la Fédération provinciale étant représentée symboliquement.">
-      <g font-family="Lora, Georgia, serif">
-        <!-- Fleuve Saint-Laurent -->
-        <path d="M 30 360 C 170 330, 235 290, 320 258 S 520 175, 730 70"
-              fill="none" stroke="#d3e6f0" stroke-width="32" stroke-linecap="round"/>
-        <text x="250" y="300" transform="rotate(-19 250 300)" fill="#9fc4d8"
-              font-style="italic" font-size="15" letter-spacing="1.5">Fleuve Saint-Laurent</text>
+        <svg class="qc-map" viewBox="0 0 800 490" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Carte schématique géoréférencée du sud du Québec. Deux pôles actifs : Val-des-Sources (Estrie) et Brome-Missisquoi (Montérégie). Cinq pôles en développement : Laval, Harmonie de Sorel, OSD Drummondville, MRC Memphrémagog, FHOSQ (réseau provincial).">
 
-        <!-- Villes de référence -->
-        <circle cx="188" cy="322" r="3" fill="#b9b0a0"/>
-        <text x="198" y="326" fill="#9a9080" font-style="italic" font-size="13">Montréal</text>
-        <circle cx="548" cy="322" r="3" fill="#b9b0a0"/>
-        <text x="558" y="326" fill="#9a9080" font-style="italic" font-size="13">Sherbrooke</text>
+      <title>EPM Régional — sud du Québec</title>
 
-        <!-- FHOSQ — portée provinciale (marqueur symbolique) -->
-        <path d="M 415 108 L 427 120 L 415 132 L 403 120 Z" fill="#b35310"/>
-        <text x="415" y="100" text-anchor="middle" fill="#1a1a14" font-size="15" font-weight="600">FHOSQ</text>
-        <text x="415" y="150" text-anchor="middle" fill="#5a5548" font-style="italic" font-size="12.5">réseau provincial</text>
+      <defs>
+        <!-- Chemin du fleuve pour label textPath (rive sud) -->
+        <path id="riverLbl" d="M 13 319 C 130 320,200 316,244 294
+                          C 272 278,315 220,370 182"></path>
 
-        <!-- Pôles en développement (cercles évidés) -->
-        <circle cx="300" cy="232" r="8" fill="#fff" stroke="#b35310" stroke-width="2.5"/>
-        <text x="312" y="237" fill="#1a1a14" font-size="14.5" font-weight="600">Sorel</text>
+        <!-- Clip intérieur -->
+        <clipPath id="mapClip">
+          <rect x="8" y="8" width="784" height="474" rx="4"></rect>
+        </clipPath>
 
-        <circle cx="385" cy="286" r="8" fill="#fff" stroke="#b35310" stroke-width="2.5"/>
-        <text x="397" y="291" fill="#1a1a14" font-size="14.5" font-weight="600">Drummondville · OSD</text>
+        <!-- Hachures zone US -->
+        <pattern id="usHatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(42)">
+          <line x1="0" y1="0" x2="0" y2="9" stroke="#cdc5b8" stroke-width="0.7"></line>
+        </pattern>
+      </defs>
 
-        <circle cx="152" cy="286" r="8" fill="#fff" stroke="#b35310" stroke-width="2.5"/>
-        <text x="164" y="291" fill="#1a1a14" font-size="14.5" font-weight="600">Laval</text>
+      <!-- Fond -->
+      <rect width="800" height="490" fill="#fefcfa"></rect>
 
-        <circle cx="562" cy="380" r="8" fill="#fff" stroke="#b35310" stroke-width="2.5"/>
-        <text x="562" y="402" text-anchor="middle" fill="#1a1a14" font-size="14.5" font-weight="600">MRC Memphrémagog</text>
+      <g clip-path="url(#mapClip)">
 
-        <!-- Pôles actifs (cercles pleins) -->
-        <circle cx="510" cy="250" r="9" fill="#b35310" stroke="#fff" stroke-width="2"/>
-        <text x="524" y="255" fill="#1a1a14" font-size="14.5" font-weight="700">Val-des-Sources</text>
+        <!-- Étiquettes de régions en filigrane -->
+        <text x="590" y="296" text-anchor="middle" font-family="'Fraunces', Georgia, serif" font-size="36" font-weight="600" fill="#1a1a14" opacity="0.028" letter-spacing="5">ESTRIE</text>
+        <text x="350" y="395" text-anchor="middle" font-family="'Fraunces', Georgia, serif" font-size="24" font-weight="600" fill="#1a1a14" opacity="0.028" letter-spacing="3">MONTÉRÉGIE</text>
+        <text x="148" y="228" text-anchor="middle" font-family="'Fraunces', Georgia, serif" font-size="20" font-weight="600" fill="#1a1a14" opacity="0.028" letter-spacing="2">LAURENTIDES</text>
+        <text x="498" y="196" text-anchor="middle" font-family="'Fraunces', Georgia, serif" font-size="18" font-weight="600" fill="#1a1a14" opacity="0.025" letter-spacing="1.5">CENTRE-DU-QUÉBEC</text>
 
-        <circle cx="430" cy="372" r="9" fill="#b35310" stroke="#fff" stroke-width="2"/>
-        <text x="430" y="356" text-anchor="middle" fill="#1a1a14" font-size="14.5" font-weight="700">Brome-Missisquoi</text>
-      </g>
+        <!-- Zone américaine (hachures + ligne) -->
+        <rect x="0" y="392" width="800" height="90" fill="url(#usHatch)" opacity="0.48"></rect>
+        <line x1="20" y1="392" x2="780" y2="392" stroke="#c4bbb0" stroke-width="0.8" stroke-dasharray="5 4"></line>
+        <text x="400" y="412" text-anchor="middle" font-family="'Lora', Georgia, serif" font-size="9.5" fill="#b0a89e" letter-spacing="3" font-style="italic">ÉTATS-UNIS</text>
+
+        <!-- Lignes réseau FHOSQ → pôles (très discrètes) -->
+        <g stroke="#b35310" stroke-width="0.9" fill="none" opacity="0.11" stroke-dasharray="2.5 6">
+          <line x1="373" y1="91" x2="209" y2="273"></line>  <!-- → Laval -->
+          <line x1="373" y1="91" x2="370" y2="200"></line>  <!-- → Sorel -->
+          <line x1="373" y1="91" x2="538" y2="219"></line>  <!-- → Drummondville -->
+          <line x1="373" y1="91" x2="685" y2="241"></line>  <!-- → Val-des-Sources -->
+          <line x1="373" y1="91" x2="469" y2="353"></line>  <!-- → Brome-Missisquoi -->
+          <line x1="373" y1="91" x2="627" y2="340"></line>  <!-- → MRC Memphrémagog -->
+        </g>
+
+        <!-- ══ Fleuve Saint-Laurent ════════════════════════
+             Centerline WGS84 : Valleyfield → Montréal → Sorel → Trois-Rivières
+             Points clés :
+               Beauharnois  45.32N 73.88W  → (165 325)
+               Boucherville 45.60N 73.45W  → (253 304)
+               Varennes     45.69N 73.43W  → (260 282)
+               Contrecoeur  45.84N 73.23W  → (313 220)
+               Sorel        46.04N 73.11W  → (370 182) ← centerline
+               Nicolet      46.22N 72.60W  → (507 153)
+               Trois-Riv.   46.34N 72.55W  → (520 130)
+        ════════════════════════════════════════════════ -->
+        <!-- Ombre -->
+        <path d="M 13 319 C 90 322,155 328,165 325
+                           C 210 322,245 308,253 304
+                           C 265 294,268 286,275 270
+                           C 300 242,338 214,370 182
+                           C 410 158,480 142,507 153
+                           C 525 145,555 128,600 108
+                           C 650  90,720  72,795  52" fill="none" stroke="#c0d5e4" stroke-width="40" stroke-linecap="round" opacity="0.32"></path>
+        <!-- Corps principal -->
+        <path d="M 13 319 C 90 322,155 328,165 325
+                           C 210 322,245 308,253 304
+                           C 265 294,268 286,275 270
+                           C 300 242,338 214,370 182
+                           C 410 158,480 142,507 153
+                           C 525 145,555 128,600 108
+                           C 650  90,720  72,795  52" fill="none" stroke="#d3e6f0" stroke-width="30" stroke-linecap="round"></path>
+        <!-- Reflet intérieur -->
+        <path d="M 13 319 C 90 322,155 328,165 325
+                           C 210 322,245 308,253 304
+                           C 265 294,268 286,275 270
+                           C 300 242,338 214,370 182
+                           C 410 158,480 142,507 153
+                           C 525 145,555 128,600 108
+                           C 650  90,720  72,795  52" fill="none" stroke="#eaf4f9" stroke-width="11" stroke-linecap="round" opacity="0.6"></path>
+
+        <!-- Label fleuve (textPath incurvé) -->
+        <text font-family="'Lora', Georgia, serif" font-size="11" font-style="italic" fill="#8bbbd0" letter-spacing="1.7" opacity="0.92">
+          <textPath href="#riverLbl" startOffset="24%">Fleuve Saint-Laurent</textPath>
+        </text>
+
+        <!-- ══ Villes de référence (gris discret) ════ -->
+        <!-- Montréal (244, 292) -->
+        <circle cx="244" cy="292" r="3.2" fill="#c4bbb0"></circle>
+        <text x="258" y="297" font-family="'Lora', Georgia, serif" font-size="12.5" font-style="italic" fill="#a09488">Montréal</text>
+
+        <!-- Sherbrooke (694, 314) -->
+        <circle cx="694" cy="314" r="3.2" fill="#c4bbb0"></circle>
+        <text x="678" y="309" text-anchor="end" font-family="'Lora', Georgia, serif" font-size="12.5" font-style="italic" fill="#a09488">Sherbrooke</text>
+
+        <!-- ══════════════════════════════════════════
+             MARQUEURS DE PROJET
+        ════════════════════════════════════════════ -->
+
+        <!-- FHOSQ — réseau provincial ◆  symbolique (373, 78) -->
+        <g transform="translate(373, 78)">
+          <path d="M 0,-20 L 18,0 L 0,20 L -18,0 Z" fill="#b35310" opacity="0.1"></path>
+          <path d="M 0,-13 L 12,0 L 0,13 L -12,0 Z" fill="#b35310"></path>
+          <text x="0" y="-23" text-anchor="middle" font-family="'Fraunces', Georgia, serif" font-size="14" font-weight="600" fill="#1a1a14">FHOSQ</text>
+          <text x="0" y="30" text-anchor="middle" font-family="'Lora', Georgia, serif" font-size="11" font-style="italic" fill="#5a5548">réseau provincial</text>
+        </g>
+
+        <!-- ── Pôles en développement ○ ──────────── -->
+
+        <!-- Laval (209, 273) — label gauche -->
+        <circle cx="209" cy="273" r="9" fill="white" stroke="#b35310" stroke-width="2.5"></circle>
+        <text x="193" y="269" text-anchor="end" font-family="'Fraunces', Georgia, serif" font-size="13" font-weight="600" fill="#1a1a14">Laval</text>
+
+        <!-- Harmonie de Sorel (370, 200) — rive sud, label en-dessous -->
+        <circle cx="370" cy="200" r="9" fill="white" stroke="#b35310" stroke-width="2.5"></circle>
+        <text x="370" y="232" text-anchor="middle" font-family="'Fraunces', Georgia, serif" font-size="13" font-weight="600" fill="#1a1a14">Harmonie de Sorel</text>
+
+        <!-- OSD · Drummondville (538, 219) — label en-dessous -->
+        <circle cx="538" cy="219" r="9" fill="white" stroke="#b35310" stroke-width="2.5"></circle>
+        <text x="538" y="244" text-anchor="middle" font-family="'Fraunces', Georgia, serif" font-size="13" font-weight="600" fill="#1a1a14">OSD · Drummondville</text>
+
+        <!-- MRC Memphrémagog (627, 340) — label gauche -->
+        <circle cx="627" cy="340" r="9" fill="white" stroke="#b35310" stroke-width="2.5"></circle>
+        <text x="611" y="336" text-anchor="end" font-family="'Fraunces', Georgia, serif" font-size="13" font-weight="600" fill="#1a1a14">MRC Memphrémagog</text>
+
+        <!-- ── Pôles actifs ● ──────────────────────── -->
+
+        <!-- Val-des-Sources (685, 241) — label au-dessus -->
+        <circle cx="685" cy="241" r="10.5" fill="#b35310" stroke="white" stroke-width="2.5"></circle>
+        <text x="685" y="222" text-anchor="middle" font-family="'Fraunces', Georgia, serif" font-size="13.5" font-weight="700" fill="#1a1a14">Val-des-Sources</text>
+
+        <!-- Brome-Missisquoi (469, 353) — label gauche -->
+        <circle cx="469" cy="353" r="10.5" fill="#b35310" stroke="white" stroke-width="2.5"></circle>
+        <text x="452" y="348" text-anchor="end" font-family="'Fraunces', Georgia, serif" font-size="13.5" font-weight="700" fill="#1a1a14">Brome-Missisquoi</text>
+
+      </g><!-- /clip -->
+
+      <!-- Cadre fin -->
+      <rect x="8" y="8" width="784" height="474" rx="4" fill="none" stroke="#ece4d6" stroke-width="0.8"></rect>
+
     </svg>
     <div class="qc-legend">
       <span><span class="swatch sw-actif"></span>Pôle actif (en opération)</span>
