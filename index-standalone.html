@@ -790,6 +790,9 @@ nav {
   font-family: var(--font-body);
   font-size: 0.88rem; color: var(--gris); line-height: 1.65; font-weight: 400;
 }
+/* FHOSQ : carte pleine largeur qui coiffe les quatre pôles régionaux */
+.devp-full { grid-column: 1 / -1; border-top-color: var(--bleu); }
+.devp-full .devp-loc { color: var(--bleu); }
 
 /* ─────────────────────────────────────────
    BESOINS
@@ -1365,7 +1368,7 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) ro
   <!-- Pôles en développement -->
   <div class="sub-label reveal"><span class="sub-count">5</span> Pôles en développement</div>
   <div class="dev-grid">
-    <div class="devp reveal">
+    <div class="devp devp-full reveal">
       <span class="devp-loc">Portée provinciale</span>
       <h3>FHOSQ</h3>
       <p>Fédération des harmonies et orchestres symphoniques du Québec : fort intérêt pour le modèle, levier de diffusion à l'échelle de la province.</p>
