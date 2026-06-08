@@ -28,7 +28,7 @@ La **coordination** est la clé de voûte : une ressource dédiée et rémunér�
 
 - **Cours collectifs au service de garde** — les enfants n'ont pas à se déplacer.
 - **Enseignants qualifiés, coordonnés et bien rémunérés** — condition première de la pérennité.
-- **Tarif volontairement abordable** — comme une bibliothèque municipale : un investissement collectif intentionnellement déficitaire pour rester accessible.
+- **Tarif volontairement abordable** — comme une bibliothèque municipale : un investissement collectif. Des partenariats ciblés soutiennent les milieux les plus défavorisés et financent l'achat d'équipement pour le déploiement des points de service, afin que le tarif reste accessible.
 - **Filière générationnelle** — les plus jeunes voient les plus âgés évoluer, de la première note à l'orchestre adulte.
 - **Accès universel** — tout enfant qui démontre intérêt et engagement doit pouvoir y accéder, quelle que soit la situation financière de sa famille.
 

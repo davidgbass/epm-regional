@@ -721,6 +721,110 @@ nav {
   color: var(--gris3); font-weight: 700;
 }
 
+/* Carte schématique du sud du Québec */
+.qc-map-wrap {
+  background: var(--blanc);
+  border: 1px solid var(--gris3);
+  border-radius: var(--radius);
+  padding: 1.6rem 1.6rem 1.2rem;
+  margin: 2rem 0 0.5rem;
+}
+.qc-map { width: 100%; height: auto; display: block; }
+.qc-legend {
+  display: flex; flex-wrap: wrap; gap: 0.4rem 1.6rem;
+  justify-content: center; margin-top: 1rem;
+  font-family: var(--font-body); font-size: 0.82rem; color: var(--gris);
+}
+.qc-legend span { display: inline-flex; align-items: center; gap: 0.5rem; }
+.qc-legend .swatch { width: 14px; height: 14px; flex-shrink: 0; }
+.sw-actif { background: var(--orange-fonce); border-radius: 50%; }
+.sw-dev { background: var(--blanc); border: 2px solid var(--orange-fonce); border-radius: 50%; }
+.sw-prov { background: var(--orange-fonce); transform: rotate(45deg); }
+
+/* Sous-titres de groupe (pôles actifs / en développement) */
+.sub-label {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-body);
+  font-size: 0.74rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gris);
+  margin: 2.6rem 0 1.2rem;
+}
+.sub-label .sub-count {
+  font-family: var(--font-display);
+  font-size: 0.78rem; font-weight: 700; color: #fff;
+  background: var(--orange-fonce);
+  border-radius: 20px; padding: 2px 11px; letter-spacing: 0;
+}
+
+/* Pôles actifs : 2 colonnes */
+.poles-actifs { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* Pôles en développement : grille compacte */
+.dev-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1rem;
+}
+.devp {
+  background: var(--blanc);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  border-top: 4px solid var(--orange);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.devp:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,26,20,0.08); }
+.devp h3 {
+  font-family: var(--font-display);
+  font-size: 1.02rem; font-weight: 700;
+  color: var(--noir); line-height: 1.2; margin-bottom: 0.5rem;
+}
+.devp .devp-loc {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--orange-fonce); margin-bottom: 0.3rem;
+}
+.devp p {
+  font-family: var(--font-body);
+  font-size: 0.88rem; color: var(--gris); line-height: 1.65; font-weight: 400;
+}
+
+/* ─────────────────────────────────────────
+   BESOINS
+───────────────────────────────────────── */
+.besoins-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1rem; margin-top: 2rem;
+}
+.besoin {
+  background: var(--blanc);
+  border: 1px solid var(--gris3);
+  border-left: 4px solid var(--orange-fonce);
+  border-radius: var(--radius);
+  padding: 2rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.besoin:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,26,20,0.08); }
+.besoin .besoin-n {
+  font-family: var(--font-display);
+  font-size: 2.6rem; font-weight: 700;
+  color: var(--creme3); line-height: 1; margin-bottom: 0.6rem;
+}
+.besoin h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem; font-weight: 600;
+  color: var(--noir); margin-bottom: 0.7rem; line-height: 1.25;
+}
+.besoin p {
+  font-family: var(--font-body);
+  font-size: 0.92rem; color: var(--gris); line-height: 1.75; font-weight: 400;
+}
+.besoins-cta {
+  margin-top: 2rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
+}
+
 /* ─────────────────────────────────────────
    PARTENAIRES
 ───────────────────────────────────────── */
@@ -819,6 +923,11 @@ footer {
 
   /* Terrain */
   .terrain-grid { grid-template-columns: 1fr; }
+  .poles-actifs { grid-template-columns: 1fr; }
+  .dev-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Besoins */
+  .besoins-grid { grid-template-columns: 1fr; }
 
   /* Partenaires */
   .partenaires-bg { padding: 3rem 0; }
@@ -881,8 +990,8 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) ro
   <a href="#mission" onclick="closeMenu()">Mission</a>
   <a href="#modele" onclick="closeMenu()">Modèle</a>
   <a href="#action" onclick="closeMenu()">En action</a>
-  <a href="#soutien" onclick="closeMenu()">Soutien</a>
-  <a href="#soutien" class="drawer-cta" onclick="closeMenu()">Faire un don →</a>
+  <a href="#besoins" onclick="closeMenu()">Soutien</a>
+  <a href="#besoins" class="drawer-cta" onclick="closeMenu()">Faire un don →</a>
 </div>
 
 <!-- ── NAV ── -->
@@ -895,9 +1004,9 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) ro
     <li><a href="#mission">Mission</a></li>
     <li><a href="#modele">Modèle</a></li>
     <li><a href="#action">En action</a></li>
-    <li><a href="#soutien">Soutien</a></li>
+    <li><a href="#besoins">Soutien</a></li>
   </ul>
-  <a href="#soutien" class="nav-cta">Faire un don →</a>
+  <a href="#besoins" class="nav-cta">Faire un don →</a>
   <button class="nav-hamburger" id="hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="drawer">
     <span></span><span></span><span></span>
   </button>
@@ -940,9 +1049,9 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) ro
 <div class="intro-band">
   <div class="intro-band-inner">
     <p>
-      Un modèle parascolaire qui allie les organismes culturels communautaires, les milieux scolaires et la rigueur pédagogique de l'UQAM — <strong>pour que la pratique musicale collective ne soit plus réservée aux familles qui peuvent se la payer.</strong>
+      <strong>La vie culturelle et musicale du Québec est aujourd'hui grandement fragilisée.</strong> Les ressources scolaires, communautaires et universitaires peuvent s'allier à travers ce projet pour renverser la tendance — un modèle parascolaire qui allie les organismes culturels communautaires, les milieux scolaires et la rigueur pédagogique de l'UQAM, pour que la pratique musicale collective ne soit plus réservée aux familles qui peuvent se la payer.
     </p>
-    <a href="#soutien" class="nav-cta" style="flex-shrink:0;">Soutenir le projet →</a>
+    <a href="#besoins" class="nav-cta" style="flex-shrink:0;">Soutenir le projet →</a>
   </div>
 </div>
 
@@ -1033,7 +1142,7 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) ro
 </div>
 
 <!-- ── SOLUTION ── -->
-<section class="section" id="soutien">
+<section class="section" id="approche">
   <div class="sec-label reveal">
     <span class="sec-num">04</span>
     <span class="sec-txt">Ce que le projet met en place</span>
@@ -1053,7 +1162,7 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) ro
     <div class="sol s3 reveal reveal-delay-2">
       <div class="sol-bar"></div>
       <h4>Un tarif volontairement abordable</h4>
-      <p>Comme une bibliothèque ou une patinoire municipale : un investissement collectif. Le modèle est intentionnellement déficitaire — pour rester accessible à tous les enfants qui démontrent un intérêt.</p>
+      <p>Comme une bibliothèque ou une patinoire municipale : un investissement collectif. Des partenariats ciblés soutiennent les milieux les plus défavorisés et financent l'achat de l'équipement nécessaire au déploiement de chaque point de service — pour que le tarif reste accessible à tous les enfants qui démontrent un intérêt.</p>
     </div>
     <div class="sol s4 reveal reveal-delay-3">
       <div class="sol-bar"></div>
@@ -1071,8 +1180,64 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) ro
     <span class="sec-num">05</span>
     <span class="sec-txt">Le projet en action</span>
   </div>
-  <h2 class="sec-headline reveal reveal-delay-1">Trois pôles<br><em>de déploiement.</em></h2>
-  <div class="terrain-grid">
+  <h2 class="sec-headline reveal reveal-delay-1">Deux pôles actifs.<br><em>Cinq en développement.</em></h2>
+  <p class="enjeux-intro reveal reveal-delay-2">
+    Deux pôles sont déjà en opération sur le terrain. Cinq autres se développent — de la Montérégie à l'Estrie, jusqu'à une portée provinciale grâce à la Fédération des harmonies et orchestres symphoniques du Québec.
+  </p>
+
+  <!-- Carte schématique du sud du Québec -->
+  <div class="qc-map-wrap reveal">
+    <svg class="qc-map" viewBox="0 0 760 430" role="img"
+         aria-label="Carte schématique du sud du Québec situant les deux pôles actifs (Val-des-Sources, Brome-Missisquoi) et les pôles en développement (Sorel, Drummondville, Laval, MRC Memphrémagog), la Fédération provinciale étant représentée symboliquement.">
+      <g font-family="Lora, Georgia, serif">
+        <!-- Fleuve Saint-Laurent -->
+        <path d="M 30 360 C 170 330, 235 290, 320 258 S 520 175, 730 70"
+              fill="none" stroke="#d3e6f0" stroke-width="32" stroke-linecap="round"/>
+        <text x="250" y="300" transform="rotate(-19 250 300)" fill="#9fc4d8"
+              font-style="italic" font-size="15" letter-spacing="1.5">Fleuve Saint-Laurent</text>
+
+        <!-- Villes de référence -->
+        <circle cx="188" cy="322" r="3" fill="#b9b0a0"/>
+        <text x="198" y="326" fill="#9a9080" font-style="italic" font-size="13">Montréal</text>
+        <circle cx="548" cy="322" r="3" fill="#b9b0a0"/>
+        <text x="558" y="326" fill="#9a9080" font-style="italic" font-size="13">Sherbrooke</text>
+
+        <!-- FHOSQ — portée provinciale (marqueur symbolique) -->
+        <path d="M 415 108 L 427 120 L 415 132 L 403 120 Z" fill="#b35310"/>
+        <text x="415" y="100" text-anchor="middle" fill="#1a1a14" font-size="15" font-weight="600">FHOSQ</text>
+        <text x="415" y="150" text-anchor="middle" fill="#5a5548" font-style="italic" font-size="12.5">réseau provincial</text>
+
+        <!-- Pôles en développement (cercles évidés) -->
+        <circle cx="300" cy="232" r="8" fill="#fff" stroke="#b35310" stroke-width="2.5"/>
+        <text x="312" y="237" fill="#1a1a14" font-size="14.5" font-weight="600">Sorel</text>
+
+        <circle cx="385" cy="286" r="8" fill="#fff" stroke="#b35310" stroke-width="2.5"/>
+        <text x="397" y="291" fill="#1a1a14" font-size="14.5" font-weight="600">Drummondville · OSD</text>
+
+        <circle cx="152" cy="286" r="8" fill="#fff" stroke="#b35310" stroke-width="2.5"/>
+        <text x="164" y="291" fill="#1a1a14" font-size="14.5" font-weight="600">Laval</text>
+
+        <circle cx="562" cy="380" r="8" fill="#fff" stroke="#b35310" stroke-width="2.5"/>
+        <text x="562" y="402" text-anchor="middle" fill="#1a1a14" font-size="14.5" font-weight="600">MRC Memphrémagog</text>
+
+        <!-- Pôles actifs (cercles pleins) -->
+        <circle cx="510" cy="250" r="9" fill="#b35310" stroke="#fff" stroke-width="2"/>
+        <text x="524" y="255" fill="#1a1a14" font-size="14.5" font-weight="700">Val-des-Sources</text>
+
+        <circle cx="430" cy="372" r="9" fill="#b35310" stroke="#fff" stroke-width="2"/>
+        <text x="430" y="356" text-anchor="middle" fill="#1a1a14" font-size="14.5" font-weight="700">Brome-Missisquoi</text>
+      </g>
+    </svg>
+    <div class="qc-legend">
+      <span><span class="swatch sw-actif"></span>Pôle actif (en opération)</span>
+      <span><span class="swatch sw-dev"></span>Pôle en développement</span>
+      <span><span class="swatch sw-prov"></span>Réseau provincial (FHOSQ)</span>
+    </div>
+  </div>
+
+  <!-- Pôles actifs -->
+  <div class="sub-label reveal"><span class="sub-count">2</span> Pôles actifs</div>
+  <div class="poles-actifs">
     <div class="site sv reveal">
       <div class="site-tag tv">Val-des-Sources</div>
       <h3>Nouveau Souffle</h3>
@@ -1094,16 +1259,65 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) ro
         <li>Démarchage auprès des autres services de garde de la CSS</li>
       </ul>
     </div>
-    <div class="site se reveal reveal-delay-2">
-      <div class="site-tag te">Expansion</div>
-      <h3>Estrie et au-delà</h3>
-      <span class="yr yo">En développement</span>
-      <ul>
-        <li>Grand intérêt de la Fédération des harmonies et orchestres symphoniques du Québec</li>
-        <li>Partenariat exploré — Orchestre symphonique de Drummondville</li>
-        <li>Amorce de discussion — Harmonie de Sorel</li>
-      </ul>
+  </div>
+
+  <!-- Pôles en développement -->
+  <div class="sub-label reveal"><span class="sub-count">5</span> Pôles en développement</div>
+  <div class="dev-grid">
+    <div class="devp reveal">
+      <span class="devp-loc">Portée provinciale</span>
+      <h3>FHOSQ</h3>
+      <p>Fédération des harmonies et orchestres symphoniques du Québec : fort intérêt pour le modèle, levier de diffusion à l'échelle de la province.</p>
     </div>
+    <div class="devp reveal reveal-delay-1">
+      <span class="devp-loc">Drummondville</span>
+      <h3>OSD</h3>
+      <p>Partenariat exploré avec l'Orchestre symphonique de Drummondville.</p>
+    </div>
+    <div class="devp reveal reveal-delay-2">
+      <span class="devp-loc">Sorel</span>
+      <h3>Harmonie de Sorel</h3>
+      <p>Amorce de discussion pour l'implantation du modèle.</p>
+    </div>
+    <div class="devp reveal">
+      <span class="devp-loc">Laval</span>
+      <h3>Laval</h3>
+      <p>Nouveau territoire ciblé pour l'implantation du modèle.</p>
+    </div>
+    <div class="devp reveal reveal-delay-1">
+      <span class="devp-loc">Estrie</span>
+      <h3>MRC Memphrémagog</h3>
+      <p>Nouvelle MRC ciblée pour un futur point de service.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── BESOINS ── -->
+<section class="section" id="besoins">
+  <div class="sec-label reveal">
+    <span class="sec-num">06</span>
+    <span class="sec-txt">Les besoins</span>
+  </div>
+  <h2 class="sec-headline reveal reveal-delay-1">Deux leviers,<br><em>pour grandir.</em></h2>
+  <p class="enjeux-intro reveal reveal-delay-2">
+    Le déploiement de chaque nouveau point de service repose sur deux investissements concrets, que les partenariats et le soutien philanthropique rendent possibles.
+  </p>
+  <div class="besoins-grid">
+    <div class="besoin reveal">
+      <div class="besoin-n" aria-hidden="true">1</div>
+      <h4>Acheter les instruments</h4>
+      <p>Couvrir l'achat d'instruments pour le déploiement de chaque nouveau poste — la condition matérielle pour que des cohortes entières puissent jouer dès la première année, sans barrière de coût pour les familles.</p>
+    </div>
+    <div class="besoin reveal reveal-delay-1">
+      <div class="besoin-n" aria-hidden="true">2</div>
+      <h4>Mobiliser une ressource spécialisée</h4>
+      <p>Financer une ressource dédiée pour l'intégration du projet dans les milieux scolaires et communautaires — la clé de voûte qui fait le pont entre les trois pôles et tisse la toile des points de service.</p>
+    </div>
+  </div>
+  <div class="besoins-cta reveal reveal-delay-2">
+    <a href="https://epm.uqam.ca" class="btn-primary">Soutenir le projet →</a>
   </div>
 </section>
 
@@ -1111,7 +1325,7 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) ro
 <div class="partenaires-bg">
   <div class="partenaires-inner">
     <div class="sec-label reveal">
-      <span class="sec-num">06</span>
+      <span class="sec-num">07</span>
       <span class="sec-txt">Partenaires</span>
     </div>
     <div class="p-list reveal">
