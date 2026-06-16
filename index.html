@@ -757,8 +757,28 @@ nav {
   border-radius: 20px; padding: 2px 11px; letter-spacing: 0;
 }
 
-/* Pôles actifs : 2 colonnes */
-.poles-actifs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+/* Pôles actifs : cartes pleine largeur empilées */
+.poles-actifs { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
+
+/* Carte de pôle actif avec photo : photo + contenu côte à côte */
+.site--photo {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.site--photo .site-photo {
+  position: relative;
+  min-height: 240px;
+}
+.site--photo .site-photo img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+.site--photo .site-body { padding: 1.8rem; }
+.site--photo .site-body > *:last-child { margin-bottom: 0; }
 
 /* Pôles en développement : grille compacte */
 .dev-grid {
@@ -841,9 +861,19 @@ nav {
   max-width: var(--max-w); margin: 0 auto;
   padding: 0 var(--pad-x);
 }
+/* Logos partenaires (traitement B : posés directement sur le crème) */
+.p-logos {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 1.8rem 2.8rem;
+  margin-top: 1.6rem;
+}
+.p-logos img {
+  height: 52px; width: auto; max-width: 185px;
+  object-fit: contain; display: block;
+}
 .p-list {
   display: flex; flex-wrap: wrap; gap: 0.6rem;
-  margin-top: 1.5rem;
+  margin-top: 1.6rem;
 }
 .p-pill {
   font-family: var(--font-body);
@@ -927,6 +957,9 @@ footer {
   /* Terrain */
   .terrain-grid { grid-template-columns: 1fr; }
   .poles-actifs { grid-template-columns: 1fr; }
+  /* Photo empilée au-dessus du contenu sur mobile */
+  .site--photo { grid-template-columns: 1fr; }
+  .site--photo .site-photo { min-height: 0; aspect-ratio: 16 / 9; }
   .dev-grid { grid-template-columns: 1fr 1fr; }
 
   /* Besoins */
@@ -934,6 +967,8 @@ footer {
 
   /* Partenaires */
   .partenaires-bg { padding: 3rem 0; }
+  .p-logos { gap: 1.4rem 2rem; }
+  .p-logos img { height: 38px; max-width: 150px; }
 
   /* Footer */
   footer { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
@@ -1342,16 +1377,21 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) ro
   <!-- Pôles actifs -->
   <div class="sub-label reveal"><span class="sub-count">3</span> Pôles actifs</div>
   <div class="poles-actifs">
-    <div class="site sv reveal">
-      <div class="site-tag tv">Val-des-Sources</div>
-      <h3>Nouveau Souffle</h3>
-      <span class="yr yv">Année 3 — En opération</span>
-      <ul>
-        <li>Milieu rural défavorisé, multiples points de service</li>
-        <li>L'Escale · Le Tournesol · Wotton · Windsor</li>
-        <li>Harmonie Val-des-Sources (95 ans d'existence)</li>
-        <li>Expansion en cours : Danville et Saint-Camille</li>
-      </ul>
+    <div class="site sv reveal site--photo">
+      <div class="site-photo">
+        <img src="pole-nouveau-souffle.jpg" alt="De jeunes musiciens jouant de la trompette au sein du projet Nouveau Souffle, Val-des-Sources" loading="lazy">
+      </div>
+      <div class="site-body">
+        <div class="site-tag tv">Val-des-Sources</div>
+        <h3>Nouveau Souffle</h3>
+        <span class="yr yv">Année 3 — En opération</span>
+        <ul>
+          <li>Milieu rural défavorisé, multiples points de service</li>
+          <li>L'Escale · Le Tournesol · Wotton · Windsor</li>
+          <li>Harmonie Val-des-Sources (95 ans d'existence)</li>
+          <li>Expansion en cours : Danville et Saint-Camille</li>
+        </ul>
+      </div>
     </div>
     <div class="site se reveal reveal-delay-1">
       <div class="site-tag te">Montréal</div>
@@ -1364,15 +1404,20 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) ro
         <li>Attestations officielles — maintien des standards de qualité et formation continue</li>
       </ul>
     </div>
-    <div class="site sb reveal reveal-delay-2">
-      <div class="site-tag tb">Brome-Missisquoi</div>
-      <h3>Chorale — La Chantignole</h3>
-      <span class="yr yb">Année 1 — Printemps 2026</span>
-      <ul>
-        <li>Cours choral au printemps 2026</li>
-        <li>Année 2 : Choral + Drumline et/ou Ensemble Jazz Pop</li>
-        <li>Démarchage auprès des autres services de garde de la CSS</li>
-      </ul>
+    <div class="site sb reveal reveal-delay-2 site--photo">
+      <div class="site-photo">
+        <img src="pole-brome-missisquoi.jpg" alt="Le pôle Brome-Missisquoi — Chorale La Chantignole" loading="lazy">
+      </div>
+      <div class="site-body">
+        <div class="site-tag tb">Brome-Missisquoi</div>
+        <h3>Chorale — La Chantignole</h3>
+        <span class="yr yb">Année 1 — Printemps 2026</span>
+        <ul>
+          <li>Cours choral au printemps 2026</li>
+          <li>Année 2 : Choral + Drumline et/ou Ensemble Jazz Pop</li>
+          <li>Démarchage auprès des autres services de garde de la CSS</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -1387,7 +1432,7 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) ro
     <div class="devp reveal reveal-delay-1">
       <span class="devp-loc">Drummondville</span>
       <h3>OSD</h3>
-      <p>Partenariat exploré avec l'Orchestre symphonique de Drummondville.</p>
+      <p>Partenariat exploré avec l'Orchestre symphonique de Drummondville : création d'une harmonie primaire regroupant les élèves de quelques écoles de la ville.</p>
     </div>
     <div class="devp reveal reveal-delay-2">
       <span class="devp-loc">Sorel</span>
@@ -1396,8 +1441,8 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) ro
     </div>
     <div class="devp reveal">
       <span class="devp-loc">Laval</span>
-      <h3>Laval</h3>
-      <p>Nouveau territoire ciblé pour l'implantation du modèle.</p>
+      <h3>OSL</h3>
+      <p>Partenariat exploré avec l'Orchestre symphonique de Laval : création d'une harmonie primaire regroupant les élèves de quelques écoles de la ville.</p>
     </div>
     <div class="devp reveal reveal-delay-1">
       <span class="devp-loc">Estrie</span>
@@ -1448,18 +1493,19 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) ro
       <span class="sec-num">07</span>
       <span class="sec-txt">Partenaires</span>
     </div>
-    <div class="p-list reveal">
-      <span class="p-pill">École préparatoire de musique · UQAM</span>
-      <span class="p-pill">Harmonie Val-des-Sources</span>
-      <span class="p-pill">Fédération des harmonies et orchestres symphoniques du Québec</span>
-      <span class="p-pill">Orchestre symphonique de Drummondville</span>
-      <span class="p-pill">La Chantignole · Bromont</span>
-      <span class="p-pill">CSS des Sommets</span>
-      <span class="p-pill">Caisse Desjardins</span>
-      <span class="p-pill">Long McQuade</span>
-      <span class="p-pill">Twig Music</span>
-      <span class="p-pill">Ville de Val-des-Sources</span>
-      <span class="p-pill">MRC des Sources</span>
+    <div class="p-logos reveal">
+      <img src="col-uqam.png" alt="École préparatoire de musique · UQAM">
+      <img src="col-osl.png" alt="Orchestre symphonique de Laval">
+      <img src="col-osd.png" alt="Orchestre symphonique de Drummondville">
+      <img src="col-harmonie.png" alt="Nouveau Souffle — Harmonie Val-des-Sources">
+      <img src="col-fhosq.png" alt="Fédération des harmonies et orchestres symphoniques du Québec">
+      <img src="col-cssds.png" alt="Centre de services scolaire des Sommets">
+      <img src="col-chant.png" alt="École de la Chantignole">
+      <img src="col-desjardins.png" alt="Caisse Desjardins">
+      <img src="col-lmc.png" alt="Long & McQuade">
+      <img src="col-twigg.png" alt="Twigg Musique">
+      <img src="col-vds.png" alt="Ville de Val-des-Sources">
+      <img src="col-mrc.png" alt="MRC des Sources">
     </div>
   </div>
 </div>
